@@ -15,7 +15,7 @@ public class InMemoryUserRepository implements UserRepository{
 
     @Override
     public List<User> readAll() {
-        return null;
+        return users;
     }
 
     @Override
