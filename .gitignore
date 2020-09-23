@@ -43,4 +43,3 @@ buildNumber.properties
 # End of https://www.toptal.com/developers/gitignore/api/maven,java
 .idea
 *.iml
-*.iml
