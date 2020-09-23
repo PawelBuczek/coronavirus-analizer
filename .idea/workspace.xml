@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4da0ee1-8279-47e9-9594-365d090bb96d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/sdacademy/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/sdacademy/Main.java" afterDir="false" />
+    <list default="true" id="e4da0ee1-8279-47e9-9594-365d090bb96d" name="Default Changelist" comment="test#1&#10;test">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +37,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
   </component>
@@ -63,10 +64,22 @@
       <updated>1600878365911</updated>
       <workItem from="1600878367140" duration="471000" />
     </task>
+    <task id="LOCAL-00001" summary="test#1&#10;test">
+      <created>1600879227475</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1600879227475</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test#1&#10;test" />
+    <option name="LAST_COMMIT_MESSAGE" value="test#1&#10;test" />
   </component>
   <component name="WindowStateProjectService">
     <state x="812" y="415" width="566" height="209" key="Github.ShareDialog" timestamp="1600878519672">
@@ -77,5 +90,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="703" y="223" key="Github.UntrackedFilesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600878527478" />
+    <state x="552" y="251" key="Vcs.Push.Dialog.v2" timestamp="1600879228609">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="251" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1600879228609" />
   </component>
 </project>
