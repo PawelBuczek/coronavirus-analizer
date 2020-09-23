@@ -1,3 +1,3 @@
 Coronavirus API:
-https://coronavirus-19-api.herokuapp.com/countries
+https://covid19-api.org/api/status
 contains data for all countries for current day
