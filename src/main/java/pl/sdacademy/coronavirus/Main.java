@@ -16,7 +16,7 @@ public class Main {
         Gson gson = new Gson();
         List<CovidCountryStatus> listOfCovidCountryStatus = new ArrayList<>();
 
-        List<Map<String, ?>> objects = gson.fromJson(new FileReader("CovidCountryStatus.json"), (Type) Object.class);
+        List<Map<String, ?>> objects = gson.fromJson(new FileReader("src/main/resources/CovidCountryStatus.json"), (Type) Object.class);
         objects.forEach(mapObject -> listOfCovidCountryStatus.add(new CovidCountryStatus(
                 (String) mapObject.get("country"),
                 (String) mapObject.get("last_update"),
