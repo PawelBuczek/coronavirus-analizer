@@ -32,8 +32,7 @@ public class User {
 
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstName() { return firstName;
     }
 
     public void setFirstName(String firstName) {
@@ -62,6 +61,10 @@ public class User {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override

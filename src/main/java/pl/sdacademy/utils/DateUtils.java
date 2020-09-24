@@ -5,6 +5,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 
+import static java.lang.StrictMath.abs;
+
 public class DateUtils {
 
     //Zadanie D2
@@ -20,7 +22,7 @@ public class DateUtils {
         for (int i = 0; i < dateList.size() - 1; i++) {
             LocalDate date1 = dateList.get(i);
             LocalDate date2 = dateList.get(i + 1);
-            if (daysBetween(date1, date2) == 1 || daysBetween(date1, date2) == -1) {
+            if (daysBetween(date1, date2) == abs(1) || daysBetween(date1, date2) == 0) {
                 count++;
             }
         }
