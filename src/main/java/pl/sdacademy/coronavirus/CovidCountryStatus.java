@@ -1,27 +1,17 @@
 package pl.sdacademy.coronavirus;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 public class CovidCountryStatus {
     private String name;
-    private LocalDateTime lastUpdate;
-    private Double cases;
-    private Double deaths;
-    private Double recovered;
+    private LocalDate date;
+    private Long cases;
+    private Long deaths;
+    private Long recovered;
 
-    public CovidCountryStatus(String name, String lastUpdate, Double cases, Double deaths, Double recovered) {
+    public CovidCountryStatus(String name, LocalDate date, Long cases, Long deaths, Long recovered) {
         this.name = name;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        this.lastUpdate =  LocalDateTime.parse(lastUpdate, formatter);
-        this.cases = cases;
-        this.deaths = deaths;
-        this.recovered = recovered;
-    }
-
-    public CovidCountryStatus(String name, LocalDateTime lastUpdate, Double cases, Double deaths, Double recovered) {
-        this.name = name;
-        this.lastUpdate = lastUpdate;
+        this.date = date;
         this.cases = cases;
         this.deaths = deaths;
         this.recovered = recovered;
@@ -31,19 +21,19 @@ public class CovidCountryStatus {
         return name;
     }
 
-    public LocalDateTime getLastUpdate() {
-        return lastUpdate;
+    public LocalDate getLastUpdate() {
+        return date;
     }
 
-    public Double getCases() {
+    public Long getCases() {
         return cases;
     }
 
-    public Double getDeaths() {
+    public Long getDeaths() {
         return deaths;
     }
 
-    public Double getRecovered() {
+    public Long getRecovered() {
         return recovered;
     }
 
@@ -51,7 +41,7 @@ public class CovidCountryStatus {
     public String toString() {
         return "CovidCountryStatus{" +
                 "name='" + name + '\'' +
-                ", lastUpdate=" + lastUpdate +
+                ", date=" + date +
                 ", cases=" + cases +
                 ", deaths=" + deaths +
                 ", recovered=" + recovered +

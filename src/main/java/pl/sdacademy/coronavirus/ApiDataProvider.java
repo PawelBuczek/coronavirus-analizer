@@ -11,28 +11,35 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ApiDataProvider {
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/dd/yy");
+
     public static List<CovidCountryStatus> getListOfCovidCountryStatusFromJason(String fileName) throws FileNotFoundException {
         Gson gson = new Gson();
         List<CovidCountryStatus> listOfCovidCountryStatus = new ArrayList<>();
 
-        List<Map<String, ?>> objects = gson.fromJson(new FileReader(fileName), (Type) Object.class);
-        objects.forEach(mapObject -> listOfCovidCountryStatus.add(new CovidCountryStatus(
-                (String) mapObject.get("country"),
-                (String) mapObject.get("last_update"),
-                (Double) mapObject.get("cases"),
-                (Double) mapObject.get("deaths"),
-                (Double) mapObject.get("recovered")
-        )));
+        Map<String, List<Map<String, ?>>> MapOfObjects = gson.fromJson(new FileReader(fileName), (Type) Object.class);
+        List<Map<String, ?>> objects = MapOfObjects.get("data");
+        objects.forEach(mapObject ->
+                listOfCovidCountryStatus.add(new CovidCountryStatus(
+                        (String) mapObject.get("countrycode"),
+                        LocalDate.parse((String) mapObject.get("date"), formatter),
+                        //necessary because of some errors in data sets taken from used API
+                        Long.parseLong(mapObject.get("cases").equals("") ? (String) mapObject.get("cases") : "0"),
+                        Long.parseLong(mapObject.get("cases").equals("") ? (String) mapObject.get("deaths") : "0"),
+                        Long.parseLong(mapObject.get("cases").equals("") ? (String) mapObject.get("recovered") : "0")
+                )));
         return listOfCovidCountryStatus;
     }
 
     public static List<CovidCountryStatus> getListOfCovidCountryStatusFromJason() throws IOException {
-        InputStream in = new URL("https://covid19-api.org/api/status").openStream();
+        InputStream in = new URL("https://thevirustracker.com/timeline/map-data.json").openStream();
         Files.copy(in, Paths.get("src/main/resources/data.json"), StandardCopyOption.REPLACE_EXISTING);
         return getListOfCovidCountryStatusFromJason("src/main/resources/data.json");
     }
