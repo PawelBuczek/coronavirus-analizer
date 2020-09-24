@@ -3,11 +3,12 @@ package pl.sdacademy.credentials;
 import java.time.LocalDate;
 
 public class User {
-    Integer id;
-    String firstName;
-    String lastName;
-    LocalDate dateOfBirth;
-    Boolean admin;
+    private Integer id;
+    private String firstName;
+    private String lastName;
+    private LocalDate dateOfBirth;
+    private boolean admin;
+
 
     public User(String firstName, String lastName, LocalDate dateOfBirth, Boolean admin) {
         this.firstName = firstName;
