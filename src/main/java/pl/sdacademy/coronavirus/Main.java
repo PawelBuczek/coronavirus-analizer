@@ -1,12 +1,10 @@
 package pl.sdacademy.coronavirus;
 
 import com.google.gson.Gson;
-import pl.sdacademy.utils.DateUtils;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
