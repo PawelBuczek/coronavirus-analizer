@@ -25,6 +25,7 @@ public class MainUI extends Application {
         stage.show();
     }
 
+    // run test
     public static void main(String[] args) {
         launch();
     }
