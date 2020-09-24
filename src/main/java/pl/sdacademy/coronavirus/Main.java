@@ -1,6 +1,7 @@
 package pl.sdacademy.coronavirus;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public class Main {
@@ -13,5 +14,15 @@ public class Main {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        try {
+            List<CovidCountryStatus> listOfCovidCountryStatus2 = ApiDataProvider.getListOfCovidCountryStatusFromJason();
+            //example of getting the data out of the list
+            System.out.println(listOfCovidCountryStatus2.size());
+            System.out.println(listOfCovidCountryStatus2.get(3));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

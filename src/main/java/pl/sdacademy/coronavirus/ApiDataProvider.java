@@ -4,7 +4,14 @@ import com.google.gson.Gson;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +31,9 @@ public class ApiDataProvider {
         )));
         return listOfCovidCountryStatus;
     }
-    public static List<CovidCountryStatus> getListOfCovidCountryStatusFromJason() throws FileNotFoundException {
+    public static List<CovidCountryStatus> getListOfCovidCountryStatusFromJason() throws IOException {
+        InputStream in = new URL("https://covid19-api.org/api/status").openStream();
+        Files.copy(in, Paths.get("src/main/resources/data.json"), StandardCopyOption.REPLACE_EXISTING);
         return getListOfCovidCountryStatusFromJason("src/main/resources/data.json");
     }
 
