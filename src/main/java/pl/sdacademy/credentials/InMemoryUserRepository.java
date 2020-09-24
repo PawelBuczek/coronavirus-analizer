@@ -26,7 +26,7 @@ public class InMemoryUserRepository implements UserRepository{
         String firstName = user.getFirstName();
         String lastName = user.getLastName();
         LocalDate dateOfBirth = user.getDateOfBirth();
-        boolean admin = user.getAdmin();
+        boolean admin = user.isAdmin();
 
         user = new User(firstName,lastName,dateOfBirth,admin);
         user.setId(id);
@@ -36,6 +36,8 @@ public class InMemoryUserRepository implements UserRepository{
 
     @Override
     public void update(User user) {
+
+
 
     }
 
