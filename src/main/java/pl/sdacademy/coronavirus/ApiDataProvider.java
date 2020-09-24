@@ -31,9 +31,9 @@ public class ApiDataProvider {
                         (String) mapObject.get("countrycode"),
                         LocalDate.parse((String) mapObject.get("date"), formatter),
                         //necessary because of some errors in data sets taken from used API
-                        Long.parseLong(mapObject.get("cases").equals("") ? (String) mapObject.get("cases") : "0"),
-                        Long.parseLong(mapObject.get("cases").equals("") ? (String) mapObject.get("deaths") : "0"),
-                        Long.parseLong(mapObject.get("cases").equals("") ? (String) mapObject.get("recovered") : "0")
+                        Long.parseLong(mapObject.get("cases").equals("") ? "0" : (String) mapObject.get("cases")),
+                        Long.parseLong(mapObject.get("deaths").equals("") ? "0" : (String) mapObject.get("deaths")),
+                        Long.parseLong(mapObject.get("recovered").equals("") ? "0" : (String) mapObject.get("recovered"))
                 )));
         return listOfCovidCountryStatus;
     }

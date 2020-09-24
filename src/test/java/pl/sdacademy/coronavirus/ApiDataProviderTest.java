@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,33 +14,32 @@ public class ApiDataProviderTest {
 
     @BeforeAll
     public static void beforeAll() throws FileNotFoundException {
-        listOfCovidCountryStatus = ApiDataProvider.getListOfCovidCountryStatusFromJason("src/main/resources/CovidCountryStatus.json");
+        listOfCovidCountryStatus = ApiDataProvider.getListOfCovidCountryStatusFromJason("src/main/resources/covidData_25Sep_2020_sample.json");
     }
 
     @Test
     public void shouldReturnBR() {
-        assertEquals(listOfCovidCountryStatus.get(2).getName(),"BR");
+        assertEquals("KR", listOfCovidCountryStatus.get(2).getName());
     }
 
     @Test
     public void shouldReturnCorrectDate() {
-        assertEquals(listOfCovidCountryStatus.get(3).getLastUpdate(), LocalDateTime.of(2020,9,23,16,23,32));
-        //"2020-09-23T16:23:32"
+        assertEquals(LocalDate.of(2020,1,22), listOfCovidCountryStatus.get(3).getLastUpdate());
     }
 
     @Test
     public void shouldReturnCases777537() {
-        assertEquals(listOfCovidCountryStatus.get(4).getCases(),777537);
+        assertEquals(1, listOfCovidCountryStatus.get(5).getCases());
     }
 
     @Test
     public void shouldReturnDeaths31568() {
-        assertEquals(listOfCovidCountryStatus.get(5).getDeaths(),31568);
+        assertEquals(25, listOfCovidCountryStatus.get(6).getDeaths());
     }
 
     @Test
     public void shouldReturnRecovered598953() {
-        assertEquals(listOfCovidCountryStatus.get(6).getRecovered(),598953);
+        assertEquals(36, listOfCovidCountryStatus.get(14).getRecovered());
     }
 
 }
