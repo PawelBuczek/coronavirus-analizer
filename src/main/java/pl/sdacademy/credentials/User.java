@@ -63,6 +63,10 @@ public class User {
         this.admin = admin;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "User{" +

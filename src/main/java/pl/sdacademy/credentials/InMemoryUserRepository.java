@@ -1,5 +1,6 @@
 package pl.sdacademy.credentials;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +22,23 @@ public class InMemoryUserRepository implements UserRepository{
     @Override
     public void create(User user) {
 
+        Integer id = users.stream().mapToInt(User::getId).max().orElse(0) + 1;
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+        LocalDate dateOfBirth = user.getDateOfBirth();
+        boolean admin = user.isAdmin();
+
+        user = new User(firstName,lastName,dateOfBirth,admin);
+        user.setId(id);
+        users.add(user);
+
+
     }
 
     @Override
     public void update(User user) {
+
+
 
     }
 
