@@ -9,4 +9,9 @@ public class User {
     LocalDate dateOfBirth;
     Boolean admin;
 
+
+
+    public Integer getId() {
+        return id;
+    }
 }
