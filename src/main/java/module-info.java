@@ -1,4 +1,4 @@
-module pl.sdacademy.javaFX {
+module pl.sdacademy.javaFx {
     requires javafx.controls;
     exports pl.sdacademy.javaFX;
 }
