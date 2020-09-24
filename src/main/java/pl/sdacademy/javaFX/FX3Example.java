@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class MyApp2 extends Application {
+public class FX3Example extends Application {
     @Override
     public void start(Stage stage) {
         VBox firstMainVBox = new VBox();
