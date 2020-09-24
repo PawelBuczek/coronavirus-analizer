@@ -31,6 +31,7 @@ public class ApiDataProvider {
         )));
         return listOfCovidCountryStatus;
     }
+
     public static List<CovidCountryStatus> getListOfCovidCountryStatusFromJason() throws IOException {
         InputStream in = new URL("https://covid19-api.org/api/status").openStream();
         Files.copy(in, Paths.get("src/main/resources/data.json"), StandardCopyOption.REPLACE_EXISTING);
