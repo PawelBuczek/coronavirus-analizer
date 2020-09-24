@@ -26,14 +26,5 @@ public class Main {
         )));
         //example of getting the data out of the list
         System.out.println(listOfCovidCountryStatus.get(2));
-
-        DateUtils dateUtils = new DateUtils();
-        List<LocalDate> listOfDates = new ArrayList<>();
-        listOfDates.add(LocalDate.of(1993,11,15));
-        listOfDates.add(LocalDate.of(1993,11,15));
-        listOfDates.add(LocalDate.of(1993,11,15));
-        System.out.println(dateUtils.datesMissing(listOfDates));
-
-
     }
 }
