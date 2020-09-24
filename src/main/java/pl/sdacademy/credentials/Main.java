@@ -14,8 +14,12 @@ public class Main {
         System.out.println(repo.readAll());
         //delete
         repo.delete(2);
-        repo.delete(marek);
+        //repo.delete(marek);
         System.out.println(repo.readAll());
+        repo.update(marek);
+        System.out.println(repo.readById(marek.getId()));
+
+
 
     }
 }

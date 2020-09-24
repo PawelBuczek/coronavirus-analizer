@@ -15,5 +15,6 @@ public class Main {
         assert listOfCovidCountryStatus != null;
         System.out.println(listOfCovidCountryStatus.size());
         System.out.println(listOfCovidCountryStatus.get(2));
+
     }
 }
