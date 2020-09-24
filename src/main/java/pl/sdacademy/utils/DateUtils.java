@@ -14,6 +14,7 @@ public class DateUtils {
 
     // Zadanie D3
     public boolean datesMissing(List<LocalDate> dateList) {
+        System.out.println(daysBetween(LocalDate.of(1993, 11, 15), LocalDate.of(1993, 11, 15)));
         Collections.sort(dateList);
         boolean result = true;
         int count = 0;

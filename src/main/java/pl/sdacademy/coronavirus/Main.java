@@ -1,10 +1,12 @@
 package pl.sdacademy.coronavirus;
 
 import com.google.gson.Gson;
+import pl.sdacademy.utils.DateUtils;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +27,12 @@ public class Main {
         //example of getting the data out of the list
         System.out.println(listOfCovidCountryStatus.get(2));
 
-
+        DateUtils dateUtils = new DateUtils();
+        List<LocalDate> listOfDates = new ArrayList<>();
+        listOfDates.add(LocalDate.of(1993,11,15));
+        listOfDates.add(LocalDate.of(1993,11,15));
+        listOfDates.add(LocalDate.of(1993,11,15));
+        System.out.println(dateUtils.datesMissing(listOfDates));
 
 
     }
