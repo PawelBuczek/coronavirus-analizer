@@ -30,6 +30,7 @@ public class InMemoryUserRepository implements UserRepository{
 
         user = new User(firstName,lastName,dateOfBirth,admin);
         user.setId(id);
+        users.add(user);
 
 
     }
