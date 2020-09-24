@@ -10,7 +10,7 @@ public class InMemoryUserRepository implements UserRepository{
 
     @Override
     public User readById(int id) {
-        return null;
+        return users.stream().filter(e->e.getId()==id).findFirst().orElse(null);
     }
 
     @Override
