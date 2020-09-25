@@ -19,27 +19,27 @@ public class ApiDataProviderTest {
 
     @Test
     public void shouldReturnBR() {
-        assertEquals("KR", listOfCovidCountryStatus.get(2).getName());
+        assertEquals("KR", listOfCovidCountryStatus.get(2).getCountryName());
     }
 
     @Test
     public void shouldReturnCorrectDate() {
-        assertEquals(LocalDate.of(2020,1,22), listOfCovidCountryStatus.get(3).getLastUpdate());
+        assertEquals(LocalDate.of(2020,1,22), listOfCovidCountryStatus.get(3).getDate());
     }
 
     @Test
     public void shouldReturnCases777537() {
-        assertEquals(1, listOfCovidCountryStatus.get(5).getCases());
+        assertEquals(1, listOfCovidCountryStatus.get(5).getTotalCases());
     }
 
     @Test
     public void shouldReturnDeaths31568() {
-        assertEquals(25, listOfCovidCountryStatus.get(6).getDeaths());
+        assertEquals(25, listOfCovidCountryStatus.get(6).getTotalDeaths());
     }
 
     @Test
     public void shouldReturnRecovered598953() {
-        assertEquals(36, listOfCovidCountryStatus.get(14).getRecovered());
+        assertEquals(36, listOfCovidCountryStatus.get(14).getTotalRecovered());
     }
 
 }

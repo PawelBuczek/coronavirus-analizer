@@ -3,48 +3,48 @@ package pl.sdacademy.coronavirus;
 import java.time.LocalDate;
 
 public class CovidDataForDateAndCountryFromAPI {
-    private String name;
+    private String country;
     private LocalDate date;
-    private Long cases;
-    private Long deaths;
-    private Long recovered;
+    private Long totalCases;
+    private Long totalDeaths;
+    private Long totalRecovered;
 
-    public CovidDataForDateAndCountryFromAPI(String name, LocalDate date, Long cases, Long deaths, Long recovered) {
-        this.name = name;
+    public CovidDataForDateAndCountryFromAPI(String country, LocalDate date, Long totalCases, Long totalDeaths, Long totalRecovered) {
+        this.country = country;
         this.date = date;
-        this.cases = cases;
-        this.deaths = deaths;
-        this.recovered = recovered;
+        this.totalCases = totalCases;
+        this.totalDeaths = totalDeaths;
+        this.totalRecovered = totalRecovered;
     }
 
-    public String getName() {
-        return name;
+    public String getCountryName() {
+        return country;
     }
 
-    public LocalDate getLastUpdate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public Long getCases() {
-        return cases;
+    public Long getTotalCases() {
+        return totalCases;
     }
 
-    public Long getDeaths() {
-        return deaths;
+    public Long getTotalDeaths() {
+        return totalDeaths;
     }
 
-    public Long getRecovered() {
-        return recovered;
+    public Long getTotalRecovered() {
+        return totalRecovered;
     }
 
     @Override
     public String toString() {
         return "CovidCountryStatus{" +
-                "name='" + name + '\'' +
+                "country='" + country + '\'' +
                 ", date=" + date +
-                ", cases=" + cases +
-                ", deaths=" + deaths +
-                ", recovered=" + recovered +
+                ", totalCases=" + totalCases +
+                ", totalDeaths=" + totalDeaths +
+                ", totalRecovered=" + totalRecovered +
                 '}';
     }
 }
