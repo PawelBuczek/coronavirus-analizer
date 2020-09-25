@@ -25,8 +25,8 @@ public class ApiDataProvider {
         Gson gson = new Gson();
         List<CovidDataForDateAndCountryFromAPI> listOfCovidCountryStatus = new ArrayList<>();
 
-        Map<String, List<Map<String, String>>> MapOfObjects = gson.fromJson(new FileReader(fileName), (Type) Object.class);
-        List<Map<String, String>> objects = MapOfObjects.get("data");
+        Map<String, List<Map<String, String>>> mapOfObjects = gson.fromJson(new FileReader(fileName), (Type) Object.class);
+        List<Map<String, String>> objects = mapOfObjects.get("data");
         objects.forEach(mapObject ->
                 listOfCovidCountryStatus.add(new CovidDataForDateAndCountryFromAPI(
                         mapObject.get("countrycode"),
