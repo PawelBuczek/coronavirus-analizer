@@ -16,16 +16,20 @@ public class DateCountryCovidStatus {
     private Long totalDeaths;
     private Long totalRecovered;
     private Long activeCases;
+    private Long newCasesOnThatDay;
     private Long deathsOnThatDay;
+    private Long recoveredOnThatDay;
 
-    public DateCountryCovidStatus(Country country, LocalDate date, Long totalCases, Long totalDeaths, Long totalRecovered, Long deathsOnThatDay) {
+    public DateCountryCovidStatus(Country country, LocalDate date, Long totalCases, Long totalDeaths, Long totalRecovered, Long newCasesOnThatDay, Long deathsOnThatDay, Long recoveredOnThatDay) {
         this.country = country;
         this.date = date;
         this.totalCases = totalCases;
         this.totalDeaths = totalDeaths;
         this.totalRecovered = totalRecovered;
         this.activeCases = totalCases - (totalRecovered + totalDeaths);
+        this.newCasesOnThatDay = newCasesOnThatDay;
         this.deathsOnThatDay = deathsOnThatDay;
+        this.recoveredOnThatDay = recoveredOnThatDay;
     }
 
     public DateCountryCovidStatus() {
@@ -92,13 +96,15 @@ public class DateCountryCovidStatus {
     public String toString() {
         return "DateCountryCovidStatus{" +
                 "id=" + id +
-                ", country=" + country +
+                ", country={id=" + country.getId() + ", twoLetterCode=" + country.getTwoLetterCode() + "}" +
                 ", date=" + date +
                 ", totalCases=" + totalCases +
                 ", totalDeaths=" + totalDeaths +
                 ", totalRecovered=" + totalRecovered +
                 ", activeCases=" + activeCases +
+                ", newCasesOnThatDay=" + newCasesOnThatDay +
                 ", deathsOnThatDay=" + deathsOnThatDay +
+                ", recoveredOnThatDay=" + recoveredOnThatDay +
                 '}';
     }
 }

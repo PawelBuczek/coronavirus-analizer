@@ -6,14 +6,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
+    private static Long casesBefore = 0L;
     private static Long deathsBefore = 0L;
+    private static Long recoveredBefore = 0L;
     private static String countryBefore = "xyzSomething";
 
     public static void main(String[] args) {
         try {
             List<CovidDataForDateAndCountryFromAPI> listDataSample = ApiDataProvider.getListOfCovidCountryStatusFromJason("src/main/resources/covidData_25Sep_2020_sample.json");
             // example of getting the data out of the list
-            System.out.println(listDataSample.size());
             System.out.println(listDataSample.get(2));
             System.out.println(listDataSample.get(1567));
         } catch (FileNotFoundException e) {
@@ -27,7 +28,9 @@ public class Main {
             // example of getting the data out of the list
             System.out.println(listDataFromAPI.size());
             System.out.println(listDataFromAPI.get(3));
-            //creating lists of countries and data rows
+
+            // since we don't have all numbers in our dataset, I am calculating them here
+            // I am also adding the Country (as Country object rather than String)
             System.out.println("Here be dragons:" + System.lineSeparator());
             Set<Country> countries = new HashSet<>();
             listDataFromAPI.forEach(covidRow -> countries.add(new Country(covidRow.getCountryName())));
@@ -36,11 +39,10 @@ public class Main {
                     covidRow -> {
                         if (!countryBefore.equals(covidRow.getCountryName())) {
                             deathsBefore = 0L;
+                            casesBefore = 0L;
+                            recoveredBefore = 0L;
                             countryBefore = covidRow.getCountryName();
                         }
-//                        if (covidRow.getTotalRecovered() != 0L) {
-//                            System.out.println(covidRow.getTotalRecovered());
-//                        }
                         covidUpdates.add(
                                 new DateCountryCovidStatus(
                                         countries.stream().filter(country -> country.getTwoLetterCode().equals(covidRow.getCountryName()))
@@ -48,17 +50,21 @@ public class Main {
                                         covidRow.getDate(),
                                         covidRow.getTotalCases(),
                                         covidRow.getTotalDeaths(),
+                                        // because that data we get from API is clearly not correct with those,
+                                        // perhaps I should make sure that the TotalRecovered number isn't suddenly plummeting to 0?
                                         covidRow.getTotalRecovered(),
-                                        covidRow.getTotalDeaths() - deathsBefore
+                                        covidRow.getTotalCases() - casesBefore,
+                                        covidRow.getTotalDeaths() - deathsBefore,
+                                        covidRow.getTotalRecovered() - recoveredBefore
                                 ));
+                        casesBefore = covidRow.getTotalCases();
                         deathsBefore = covidRow.getTotalDeaths();
+                        recoveredBefore = covidRow.getTotalRecovered();
                     });
+            //just to view some of the interesting days in order from US for example
             List<DateCountryCovidStatus> covidUpdatesUS = covidUpdates.stream()
                     .filter(covidUpdate -> covidUpdate.getCountry().getTwoLetterCode().equals("US"))
                     .collect(Collectors.toList());
-            System.out.println(covidUpdatesUS.get(0));
-            System.out.println(covidUpdatesUS.get(1));
-            System.out.println(System.lineSeparator());
             for (int i = 40; i < 55; i++) {
                 System.out.println(covidUpdatesUS.get(i));
             }
