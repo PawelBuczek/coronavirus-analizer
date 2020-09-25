@@ -2,14 +2,14 @@ package pl.sdacademy.coronavirus;
 
 import java.time.LocalDate;
 
-public class CovidCountryStatus {
+public class CovidDataForDateAndCountryFromAPI {
     private String name;
     private LocalDate date;
     private Long cases;
     private Long deaths;
     private Long recovered;
 
-    public CovidCountryStatus(String name, LocalDate date, Long cases, Long deaths, Long recovered) {
+    public CovidDataForDateAndCountryFromAPI(String name, LocalDate date, Long cases, Long deaths, Long recovered) {
         this.name = name;
         this.date = date;
         this.cases = cases;

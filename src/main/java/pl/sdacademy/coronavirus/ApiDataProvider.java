@@ -20,14 +20,14 @@ import java.util.Map;
 public class ApiDataProvider {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/dd/yy");
 
-    public static List<CovidCountryStatus> getListOfCovidCountryStatusFromJason(String fileName) throws FileNotFoundException {
+    public static List<CovidDataForDateAndCountryFromAPI> getListOfCovidCountryStatusFromJason(String fileName) throws FileNotFoundException {
         Gson gson = new Gson();
-        List<CovidCountryStatus> listOfCovidCountryStatus = new ArrayList<>();
+        List<CovidDataForDateAndCountryFromAPI> listOfCovidCountryStatus = new ArrayList<>();
 
         Map<String, List<Map<String, ?>>> MapOfObjects = gson.fromJson(new FileReader(fileName), (Type) Object.class);
         List<Map<String, ?>> objects = MapOfObjects.get("data");
         objects.forEach(mapObject ->
-                listOfCovidCountryStatus.add(new CovidCountryStatus(
+                listOfCovidCountryStatus.add(new CovidDataForDateAndCountryFromAPI(
                         (String) mapObject.get("countrycode"),
                         LocalDate.parse((String) mapObject.get("date"), formatter),
                         //necessary because of some errors in data sets taken from used API
@@ -38,7 +38,7 @@ public class ApiDataProvider {
         return listOfCovidCountryStatus;
     }
 
-    public static List<CovidCountryStatus> getListOfCovidCountryStatusFromJason() throws IOException {
+    public static List<CovidDataForDateAndCountryFromAPI> getListOfCovidCountryStatusFromJason() throws IOException {
         InputStream in = new URL("https://thevirustracker.com/timeline/map-data.json").openStream();
         Files.copy(in, Paths.get("src/main/resources/data.json"), StandardCopyOption.REPLACE_EXISTING);
         return getListOfCovidCountryStatusFromJason("src/main/resources/data.json");

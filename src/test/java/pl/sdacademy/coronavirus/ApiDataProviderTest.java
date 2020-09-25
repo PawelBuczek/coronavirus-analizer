@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ApiDataProviderTest {
-    private static List<CovidCountryStatus> listOfCovidCountryStatus;
+    private static List<CovidDataForDateAndCountryFromAPI> listOfCovidCountryStatus;
 
     @BeforeAll
     public static void beforeAll() throws FileNotFoundException {

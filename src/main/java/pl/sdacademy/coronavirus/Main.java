@@ -7,7 +7,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         try {
-            List<CovidCountryStatus> listOfCovidCountryStatus = ApiDataProvider.getListOfCovidCountryStatusFromJason("src/main/resources/covidData_25Sep_2020_sample.json");
+            List<CovidDataForDateAndCountryFromAPI> listOfCovidCountryStatus = ApiDataProvider.getListOfCovidCountryStatusFromJason("src/main/resources/covidData_25Sep_2020_sample.json");
             // example of getting the data out of the list
             System.out.println(listOfCovidCountryStatus.size());
             System.out.println(listOfCovidCountryStatus.get(2));
@@ -16,7 +16,7 @@ public class Main {
         }
 
         try {
-            List<CovidCountryStatus> listOfCovidCountryStatus2 = ApiDataProvider.getListOfCovidCountryStatusFromJason();
+            List<CovidDataForDateAndCountryFromAPI> listOfCovidCountryStatus2 = ApiDataProvider.getListOfCovidCountryStatusFromJason();
             // example of getting the data out of the list
             System.out.println(listOfCovidCountryStatus2.size());
             System.out.println(listOfCovidCountryStatus2.get(3));
