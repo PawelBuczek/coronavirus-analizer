@@ -20,20 +20,21 @@ import java.util.Map;
 public class ApiDataProvider {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/dd/yy");
 
+    @SuppressWarnings("SpellCheckingInspection")
     public static List<CovidDataForDateAndCountryFromAPI> getListOfCovidCountryStatusFromJason(String fileName) throws FileNotFoundException {
         Gson gson = new Gson();
         List<CovidDataForDateAndCountryFromAPI> listOfCovidCountryStatus = new ArrayList<>();
 
-        Map<String, List<Map<String, ?>>> MapOfObjects = gson.fromJson(new FileReader(fileName), (Type) Object.class);
-        List<Map<String, ?>> objects = MapOfObjects.get("data");
+        Map<String, List<Map<String, String>>> MapOfObjects = gson.fromJson(new FileReader(fileName), (Type) Object.class);
+        List<Map<String, String>> objects = MapOfObjects.get("data");
         objects.forEach(mapObject ->
                 listOfCovidCountryStatus.add(new CovidDataForDateAndCountryFromAPI(
-                        (String) mapObject.get("countrycode"),
-                        LocalDate.parse((String) mapObject.get("date"), formatter),
+                        mapObject.get("countrycode"),
+                        LocalDate.parse(mapObject.get("date"), formatter),
                         //necessary because of some errors in data sets taken from used API
-                        Long.parseLong(mapObject.get("cases").equals("") ? "0" : (String) mapObject.get("cases")),
-                        Long.parseLong(mapObject.get("deaths").equals("") ? "0" : (String) mapObject.get("deaths")),
-                        Long.parseLong(mapObject.get("recovered").equals("") ? "0" : (String) mapObject.get("recovered"))
+                        Long.parseLong(mapObject.get("cases").equals("") ? "0" : mapObject.get("cases")),
+                        Long.parseLong(mapObject.get("deaths").equals("") ? "0" : mapObject.get("deaths")),
+                        Long.parseLong(mapObject.get("recovered").equals("") ? "0" : mapObject.get("recovered"))
                 )));
         return listOfCovidCountryStatus;
     }
