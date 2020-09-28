@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InMemoryUserRepository implements UserRepository{
@@ -30,6 +31,43 @@ public class InMemoryUserRepository implements UserRepository{
 
     @Override
     public void update(User user) {
+        int id= user.getId();
+        User userToUpdate = readById(id);
+        if (userToUpdate != null) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Podaj aktualne imię: ");
+            String newFirstName = scanner.nextLine();
+            userToUpdate.setFirstName(newFirstName);
+            System.out.println("Podaj aktualne nazwisko: ");
+            String newLastName = scanner.nextLine();
+            userToUpdate.setLastName(newLastName);
+            System.out.println("Podaj zaktualizowaną datę urodzenia w formacie YYYY-MM-DD : ");
+            String newDateOfBirth = scanner.nextLine();
+            LocalDate newDateOfBirthLD = LocalDate.parse(newDateOfBirth);
+            userToUpdate.setDateOfBirth(newDateOfBirthLD);
+            System.out.println("Czy użytkownik jest adminem - wpisz literę T jeśli tak lub N jeśli nie");
+            String odp = scanner.nextLine();
+            boolean admin;
+            switch(odp){
+                case "T":
+                    admin=true;
+                    userToUpdate.setAdmin(admin);
+                    break;
+                case "N":
+                    admin = false;
+                    userToUpdate.setAdmin(admin);
+                    break;
+                default:
+                    System.out.println("Podałeś niewłaściwą literę, spróbuj ponownie");
+            }
+
+
+
+
+
+
+
+        }
 
 
 
