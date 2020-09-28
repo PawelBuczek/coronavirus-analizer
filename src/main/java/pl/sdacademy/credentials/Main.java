@@ -16,6 +16,11 @@ public class Main {
         repo.delete(2);
         repo.delete(marek);
         System.out.println(repo.readAll());
-
+        System.out.println(repo.readById(marek.getId()));
+        //update
+        User anna = new User("anna", "Cabacka", LocalDate.of(2010,1,25),true);
+        repo.create(anna);
+        repo.update(anna);
+        System.out.println(anna);
     }
 }
