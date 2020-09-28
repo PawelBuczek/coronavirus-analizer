@@ -47,6 +47,11 @@ public class HibernateUserRepository implements UserRepository {
 
     @Override
     public void delete(User user) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(user);
+        transaction.commit();
+        session.close();
 
 
 
@@ -60,4 +65,6 @@ public class HibernateUserRepository implements UserRepository {
         session.close();
 
     }
+
+
 }
