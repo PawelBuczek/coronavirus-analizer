@@ -51,21 +51,21 @@ public class Main {
                                         covidRow.getTotalCases(),
                                         covidRow.getTotalDeaths(),
                                         // because that data we get from API is clearly not correct with those,
-                                        // perhaps I should make sure that the TotalRecovered number isn't suddenly plummeting to 0?
-                                        covidRow.getTotalRecovered(),
+                                        // the below is making sure that the TotalRecovered number decreasing
+                                        Math.max(recoveredBefore, covidRow.getTotalRecovered()),
                                         covidRow.getTotalCases() - casesBefore,
                                         covidRow.getTotalDeaths() - deathsBefore,
                                         covidRow.getTotalRecovered() - recoveredBefore
                                 ));
                         casesBefore = covidRow.getTotalCases();
                         deathsBefore = covidRow.getTotalDeaths();
-                        recoveredBefore = covidRow.getTotalRecovered();
+                        recoveredBefore = Math.max(recoveredBefore, covidRow.getTotalRecovered());
                     });
             //just to view some of the interesting days in order from US for example
             List<DateCountryCovidStatus> covidUpdatesUS = covidUpdates.stream()
                     .filter(covidUpdate -> covidUpdate.getCountry().getTwoLetterCode().equals("US"))
                     .collect(Collectors.toList());
-            for (int i = 40; i < 55; i++) {
+            for (int i = 40; i < 65; i++) {
                 System.out.println(covidUpdatesUS.get(i));
             }
 
