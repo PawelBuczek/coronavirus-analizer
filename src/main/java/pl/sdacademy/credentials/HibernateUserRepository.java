@@ -2,7 +2,6 @@ package pl.sdacademy.credentials;
 
 import org.hibernate.SessionFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HibernateUserRepository implements UserRepository {
