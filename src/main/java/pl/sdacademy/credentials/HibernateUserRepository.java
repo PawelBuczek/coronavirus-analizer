@@ -6,7 +6,7 @@ import java.util.List;
 public class HibernateUserRepository implements UserRepository {
     //Utwórz implementację interfejsu UserRepository - HibernateUserRepository - implementacja posiada pole - fabrykę sesji.
     // Implementacje metod interfejsu UserRepository powinny być najprostsze możliwe (nic nie robią i zwracają null, jeśli mają zwrócić wartość).
-    private List<User> sessionFactory = new ArrayList<>();
+    private List<Integer> sessionFactory;
 
     @Override
     public User readById(int id) {
