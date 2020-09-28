@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pl.sdacademy.coronavirus.CovidDao;
+import pl.sdacademy.coronavirus.EntityDataProvider;
 
 public class MainUI extends VBox {
     Button buttonShowGraph;
@@ -14,8 +15,9 @@ public class MainUI extends VBox {
     Label labelMainMenu;
     Label labelLastUpdate;
     CovidDao covidDao;
+    EntityDataProvider entityDataProvider;
 
-    public MainUI(Stage stage, CovidDao covidDao) {
+    public MainUI(Stage stage, CovidDao covidDao, EntityDataProvider entityDataProvider) {
         super();
         buttonShowGraph = new Button("Wyświetl wykres");
         buttonRefreshData = new Button("Aktualizuj dane");
@@ -26,8 +28,10 @@ public class MainUI extends VBox {
         this.getChildren().add(labelMainMenu);
         this.getChildren().add(labelLastUpdate);
         buttonShowGraph.setOnAction(event -> showGraph(stage));
+        buttonRefreshData.setOnAction(event -> refreshData(stage));
         this.setAlignment(Pos.CENTER);
         this.covidDao = covidDao;
+        this.entityDataProvider = entityDataProvider;
     }
 
     private void showGraph(Stage stage) {
@@ -36,5 +40,9 @@ public class MainUI extends VBox {
         graphVBox.getChildren().add(topInfo);
         Scene graphScene = new Scene(graphVBox, 600, 800);
         stage.setScene(graphScene);
+    }
+
+    private void refreshData(Stage stage) {
+        //rzeczy sie tu beda dziac
     }
 }

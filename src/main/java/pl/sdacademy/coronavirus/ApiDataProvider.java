@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ApiDataProvider {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/dd/yy");
@@ -23,20 +24,17 @@ public class ApiDataProvider {
     @SuppressWarnings("SpellCheckingInspection")
     public static List<CovidDataForDateAndCountryFromAPI> getListOfCovidCountryStatusFromJason(String fileName) throws FileNotFoundException {
         Gson gson = new Gson();
-        List<CovidDataForDateAndCountryFromAPI> listOfCovidCountryStatus = new ArrayList<>();
 
         Map<String, List<Map<String, String>>> mapOfObjects = gson.fromJson(new FileReader(fileName), (Type) Object.class);
         List<Map<String, String>> objects = mapOfObjects.get("data");
-        objects.forEach(mapObject ->
-                listOfCovidCountryStatus.add(new CovidDataForDateAndCountryFromAPI(
+        return objects.stream().map(mapObject -> new CovidDataForDateAndCountryFromAPI(
                         mapObject.get("countrycode"),
                         LocalDate.parse(mapObject.get("date"), formatter),
                         //necessary because of some errors in data sets taken from used API
                         Long.parseLong(mapObject.get("cases").equals("") ? "0" : mapObject.get("cases")),
                         Long.parseLong(mapObject.get("deaths").equals("") ? "0" : mapObject.get("deaths")),
                         Long.parseLong(mapObject.get("recovered").equals("") ? "0" : mapObject.get("recovered"))
-                )));
-        return listOfCovidCountryStatus;
+                )).collect(Collectors.toList());
     }
 
     public static List<CovidDataForDateAndCountryFromAPI> getListOfCovidCountryStatusFromJason() throws IOException {
