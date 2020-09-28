@@ -9,7 +9,7 @@ public class DateCountryCovidStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Country country;
     private LocalDate date;
     private Long totalCases;
