@@ -7,7 +7,7 @@ public interface CovidDao {
     List<Country> getCountries();
     DateCountryCovidStatus getDataByCountryAndDateRange(Integer id, LocalDate startDate, LocalDate lastDate);
     DateCountryCovidStatus getCurrentDataByCountry(Integer id);
-    DateCountryCovidStatus getCurrentWorldDate();
-    void storeData();
+    DateCountryCovidStatus getCurrentWorldData();
+    void storeData(List<Country> countryList);
 }
 
