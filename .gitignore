@@ -44,3 +44,4 @@ buildNumber.properties
 .idea
 *.iml
 src/main/resources/data.json
+src/main/resources/hibernate.cfg.xml
