@@ -6,10 +6,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
-    private static Long casesBefore = 0L;
-    private static Long deathsBefore = 0L;
-    private static Long recoveredBefore = 0L;
-    private static String countryBefore = "xyzSomething";
 
     public static void main(String[] args) {
         try {
