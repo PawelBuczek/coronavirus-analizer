@@ -1,6 +1,9 @@
 package pl.sdacademy.credentials;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +42,6 @@ public class HibernateUserRepository implements UserRepository {
 
     }
 
-    @Override
-    public void update(User user) {
-
-    }
 
     @Override
     public void delete(User user) {
