@@ -29,9 +29,11 @@ public class HibernateUserRepository implements UserRepository {
     @Override
     public List<User> readAll() {
         Session session = sessionFactory.openSession();
-        Query<User> query1 = session.createQuery("SELECT id,firstName," +
-                "lastName,dateOfBirth,admin FROM User", User.class);
+        Transaction transaction = session.beginTransaction();
+        Query<User> query1 = session.createQuery("FROM User", User.class);
         List<User> result = query1.getResultList();
+        transaction.commit();
+        session.close();
         return result;
 
 
@@ -39,6 +41,12 @@ public class HibernateUserRepository implements UserRepository {
 
     @Override
     public void create(User user) {
+        Session session =  sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(user);
+        transaction.commit();
+        session.close();
+
 
     }
 
