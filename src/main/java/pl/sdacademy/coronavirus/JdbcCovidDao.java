@@ -1,49 +1,52 @@
 package pl.sdacademy.coronavirus;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcCovidDao implements CovidDao {
-    //Utwórz implementację interfejsu CovidDao (DB3) o nazwie JdbcCovidDao.
-// Implementacja korzysta bezpośrednio ze sterownika JDBC. Zaimplementuj metodę getCountries.
-// Pozostałe metody zaimplementuj  w sposób zaślepkowy.
+    private final MysqlDataSource dataSource = new MysqlDataSource();
 
-
-    private Connection connection;
-public JdbcCovidDao(Connection connection) {
-    this.connection = connection;
-}
-
-
+    public MysqlDataSource getDataSource() throws SQLException {
+        dataSource.setUser("root");
+        dataSource.setPassword("Twoje hasło");
+        dataSource.setDatabaseName("coronavirus-analizer");
+        dataSource.setServerTimezone("UTC");
+        return dataSource;
+    }
 
     @Override
-    public List<Country> getCountries() throws SQLException {
-        try (Statement statement = connection.createStatement()){
-            try (ResultSet resultSet = statement.executeQuery("" +
-                    " SELECT " +
-                    " * " +
-                    "FROM " +
-                    " country")) {
+    public List<Country> getCountries() {
+        try (Connection connection = getDataSource().getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `coronavirus-analizer`.`country`");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Country> countries = new ArrayList<>();
+            while (resultSet.next()) {
+                String fullName = resultSet.getString("name");
+                String shortName = resultSet.getString("twoLetterCode");
+                Long population = resultSet.getLong("numberOfCitizens");
+                countries.add(new Country(fullName, shortName, population));
             }
+            return countries;
         } catch (SQLException e) {
-            throw new RuntimeException("Brak danych z listy krajów");
+            throw new RuntimeException("Błąd");
         }
-
     }
 
     @Override
-    public DateCountryCovidStatus getDataByCountryAndDateRange(Integer id, LocalDate startDate, LocalDate lastDate) {
+    public List<DateCountryCovidStatus> getDataByCountryAndDateRange(Integer id, LocalDate startDate, LocalDate lastDate) {
         return null;
     }
 
     @Override
-    public DateCountryCovidStatus getCurrentDataByCountry(Integer id) {
+    public List<DateCountryCovidStatus> getCurrentDataByCountry(Integer id) {
         return null;
     }
 
     @Override
-    public DateCountryCovidStatus getCurrentWorldData() {
+    public List<DateCountryCovidStatus> getCurrentWorldData() {
         return null;
     }
 

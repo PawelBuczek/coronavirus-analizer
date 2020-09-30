@@ -8,6 +8,7 @@ module pl.sdacademy {
     requires java.xml.bind;
     requires com.sun.xml.bind;
     requires com.fasterxml.classmate;
+    requires mysql.connector.java;
     exports pl.sdacademy.javaFX;
     exports pl.sdacademy.coronavirus;
 }

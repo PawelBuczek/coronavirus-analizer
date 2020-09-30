@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface CovidDao {
     List<Country> getCountries() throws SQLException;
-    DateCountryCovidStatus getDataByCountryAndDateRange(Integer id, LocalDate startDate, LocalDate lastDate);
-    DateCountryCovidStatus getCurrentDataByCountry(Integer id);
-    DateCountryCovidStatus getCurrentWorldData();
+    List<DateCountryCovidStatus> getDataByCountryAndDateRange(Integer id, LocalDate startDate, LocalDate lastDate);
+    List<DateCountryCovidStatus> getCurrentDataByCountry(Integer id);
+    List<DateCountryCovidStatus> getCurrentWorldData();
     void storeData(List<Country> countryList);
 }
 
