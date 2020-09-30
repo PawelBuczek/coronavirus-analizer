@@ -27,6 +27,19 @@ public class Weather {
         return id;
     }
 
+
+    public void setTemperatureCelsius(Double temperatureCelsius) {
+        this.temperatureCelsius = temperatureCelsius;
+    }
+
+    public void setCloudCover(Double cloudCover) {
+        this.cloudCover = cloudCover;
+    }
+
+    public void setWindSpeedKmPerH(Double windSpeedKmPerH) {
+        this.windSpeedKmPerH = windSpeedKmPerH;
+    }
+
     public Double getTemperatureCelsius() {
         return temperatureCelsius;
     }
@@ -39,7 +52,13 @@ public class Weather {
         return windSpeedKmPerH;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "Weather{" +
+                "id=" + id +
+                ", temperatureCelsius=" + temperatureCelsius +
+                ", cloudCover=" + cloudCover +
+                ", windSpeedKmPerH=" + windSpeedKmPerH +
+                '}';
     }
 }
