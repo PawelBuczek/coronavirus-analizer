@@ -7,13 +7,15 @@
         <property name="connection.url">jdbc:mysql://localhost:3306/coronavirus-analizer?serverTimezone=UTC</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">Milosc1606</property>
+        <property name="connection.password">password</property>
 
         <property name="hibernate.hbm2ddl.auto">create</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
 
-<!--     <mapping class="pl.sdacademy."/>-->
+     <mapping class="pl.sdacademy.coronavirus.Country"/>
+     <mapping class="pl.sdacademy.coronavirus.DateCountryCovidStatus"/>
+     <mapping class="pl.sdacademy.weather.Weather"/>
     </session-factory>
 </hibernate-configuration>
 

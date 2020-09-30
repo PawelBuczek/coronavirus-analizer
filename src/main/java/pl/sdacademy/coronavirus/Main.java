@@ -1,13 +1,24 @@
 package pl.sdacademy.coronavirus;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        LocalDate df;
+        SessionFactory factory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .buildSessionFactory();
+        Session session = factory.openSession();
         try {
             List<CovidDataForDateAndCountryFromAPI> listDataSample = ApiDataProvider.getListOfCovidCountryStatusFromJason("src/main/resources/covidData_25Sep_2020_sample.json");
             // example of getting the data out of the list
@@ -28,6 +39,8 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 
     }
 }
