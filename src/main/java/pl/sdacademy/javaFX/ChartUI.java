@@ -2,7 +2,6 @@ package pl.sdacademy.javaFX;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.DatePicker;
@@ -15,14 +14,18 @@ import java.time.LocalDate;
 
 public class ChartUI extends VBox {
 
+
+    private final Object CovidDao;
     Label primaryChart;
     Label totalCases;
     Label countOfTotalCases;
     Label totalDeath;
     Label countOfTotalDeath;
 
-    public ChartUI(Stage stage) {
+    public ChartUI(Stage stage, Object covidDao) {
         super();
+        //FX12
+        CovidDao = covidDao;
         //1
         primaryChart = new Label("Wykres");
         totalCases = new Label("Aktualnie zarażonych na świecie: ");
@@ -50,7 +53,6 @@ public class ChartUI extends VBox {
         stage.setTitle("Wykres");
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
-
 
     }
 }
