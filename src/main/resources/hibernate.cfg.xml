@@ -16,6 +16,7 @@
      <mapping class="pl.sdacademy.coronavirus.Country"/>
      <mapping class="pl.sdacademy.coronavirus.DateCountryCovidStatus"/>
      <mapping class="pl.sdacademy.weather.Weather"/>
+     <mapping class="pl.sdacademy.credentials.User"/>
     </session-factory>
 </hibernate-configuration>
 

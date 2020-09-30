@@ -68,6 +68,10 @@ public class DateCountryCovidStatus {
         return deathsOnThatDay;
     }
 
+    public Long getNewCasesOnThatDay() { return newCasesOnThatDay; }
+
+    public Long getRecoveredOnThatDay() { return recoveredOnThatDay; }
+
     public void setId(int id) {
         this.id = id;
     }
