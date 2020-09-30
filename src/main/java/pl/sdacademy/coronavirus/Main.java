@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-        LocalDate df;
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .buildSessionFactory();
