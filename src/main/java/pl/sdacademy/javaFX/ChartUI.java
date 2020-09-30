@@ -1,50 +1,58 @@
 package pl.sdacademy.javaFX;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.time.LocalDate;
+
+public class ChartUI extends VBox {
 
 
-public class ChartUI extends Application {
-    public static void main(String[] args) {
-        launch();
-    }
+    private final Object CovidDao;
+    Label primaryChart;
+    Label totalCases;
+    Label countOfTotalCases;
+    Label totalDeath;
+    Label countOfTotalDeath;
 
-    @Override
-    public void start(Stage secondStage) throws IOException {
+    public ChartUI(Stage stage, Object covidDao) {
+        super();
+        //FX12
+        CovidDao = covidDao;
+        //1
+        primaryChart = new Label("Wykres");
+        totalCases = new Label("Aktualnie zarażonych na świecie: ");
+        countOfTotalCases = new Label("X");
+        totalDeath = new Label("Łącznie zgonów na świecie: ");
+        countOfTotalDeath = new Label("X");
 
+        //2
+        ListView<String> countryListView = new ListView<>();
+        countryListView.getItems().addAll("Polska", "Francja", "Włochy", "Włochy");
+        countryListView.getSelectionModel().selectFirst();
 
-//        List<CovidDataForDateAndCountryFromAPI> listDataSample = ApiDataProvider.getListOfCovidCountryStatusFromJason("src/main/resources/covidData_25Sep_2020_sample.json");
-//        ListView<String> listView = new ListView<>();
-//        listDataSample.forEach(countryStatus -> {
-//            listOfCountries.add(countryStatus());
-//            return listDataSample;
-//        });
+        //3
+        final DatePicker datePicker = new DatePicker();
+        datePicker.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                LocalDate chooseTheDate;
+                chooseTheDate = datePicker.getValue();
+                System.err.println("Selected date: " + chooseTheDate);
+            }
+        });
 
-        ListView<String> listView = new ListView<>();
-        listView.setPrefSize(200, 400);
-        listView.getItems().addAll("Polska", "Francja", "Włochy", "Norwegia", "Japonia");
-        listView.getSelectionModel().setSelectionMode(
-                SelectionMode.MULTIPLE);
-        listView.getItems().addAll();
-
-        VBox vBox = new VBox(5, listView);
-        vBox.getChildren().add(new Label("Wykres"));
-        vBox.getChildren().add(new Label("Aktualnie zarażonych na świecie: "));
-        vBox.getChildren().add(new Label("X"));
-        vBox.getChildren().add(new Label("Łącznie zgonów na świecie: "));
-        vBox.getChildren().add(new Label("X"));
-
-        Scene scene = new Scene(vBox, 400, 400);
-        secondStage.setScene(scene);
-        secondStage.show();
+        //4
+        stage.setTitle("Wykres");
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
 
     }
 }
-
