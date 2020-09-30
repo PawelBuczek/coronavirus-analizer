@@ -20,11 +20,7 @@ public class Main {
                 .configure("hibernate.cfg.xml")
                 .buildSessionFactory();
         readData(sessionFactory);
-
-
-
-
-
+        System.out.println(readDataModified(sessionFactory));
 
         sessionFactory.close();
 
@@ -40,6 +36,16 @@ public class Main {
         System.out.println(result);
         transaction.commit();
         session.close();
+    }
+    public static List<Weather> readDataModified(SessionFactory sessionFactory) {
+
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Query<Weather> query = session.createQuery("FROM Weather ", Weather.class);
+        List<Weather> result = query.getResultList();
+        transaction.commit();
+        session.close();
+        return result;
     }
 
 
