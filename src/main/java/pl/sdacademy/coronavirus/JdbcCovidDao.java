@@ -11,6 +11,8 @@ import java.util.Set;
 
 public class JdbcCovidDao implements CovidDao {
     private final MysqlDataSource dataSource = new MysqlDataSource();
+    private final PreparedStatement preparedDeleteCountry;
+    private final PreparedStatement preparedDeleteDateCountryCovidStatus;
     private final PreparedStatement preparedSaveCountry;
     private final PreparedStatement preparedSaveDateCountryCovidStatus;
     private final PreparedStatement preparedSelectAllFromCountries;
@@ -24,12 +26,16 @@ public class JdbcCovidDao implements CovidDao {
         dataSource.setDatabaseName("coronavirus-analizer");
         dataSource.setServerTimezone("UTC");
         Connection connection = getDataSource().getConnection();
+        preparedDeleteCountry = connection.prepareStatement(
+                "DELETE FROM `coronavirus-analizer`.country");
+        preparedDeleteDateCountryCovidStatus = connection.prepareStatement(
+                "DELETE FROM `coronavirus-analizer`.datecountrycovidstatus");
         preparedSaveDateCountryCovidStatus = connection.prepareStatement(
                 "INSERT INTO `coronavirus-analizer`.datecountrycovidstatus (activeCases, date, deathsOnThatDay, newCasesOnThatDay, recoveredOnThatDay, totalCases, totalDeaths, totalRecovered, country_id)" +
                         " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
         preparedSaveCountry = connection.prepareStatement(
                 "INSERT INTO `coronavirus-analizer`.country (name, numberOfCitizens, twoLetterCode)"
-                        + " VALUES(?, ?, ?)");
+                        + " VALUES(?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
         preparedSelectAllFromCountries = connection.prepareStatement(
                 "SELECT * FROM `coronavirus-analizer`.country");
         preparedSelectByCountryAndDateRange = connection.prepareStatement(
@@ -47,13 +53,16 @@ public class JdbcCovidDao implements CovidDao {
     @Override
     public List<Country> getCountries() {
         try {
+            Country country;
             ResultSet resultSet = preparedSelectAllFromCountries.executeQuery();
             List<Country> countries = new ArrayList<>();
             while (resultSet.next()) {
-                countries.add(new Country(
+                country = new Country(
                         resultSet.getString("name"),
                         resultSet.getString("twoLetterCode"),
-                        resultSet.getLong("numberOfCitizens")));
+                        resultSet.getLong("numberOfCitizens"));
+                country.setId((int) resultSet.getLong("id"));
+                countries.add(country);
             }
             return countries;
         } catch (SQLException e) {
@@ -90,34 +99,46 @@ public class JdbcCovidDao implements CovidDao {
 
     @Override
     public void storeData(List<DateCountryCovidStatus> dataCountryCovidList) {
+        try {
+            preparedDeleteCountry.execute();
+            preparedDeleteDateCountryCovidStatus.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
         Set<Country> countries = new HashSet<>();
         dataCountryCovidList.forEach(dataRow -> countries.add(dataRow.getCountry()));
-        countries.forEach(this::storeCountry);
+        countries.forEach(country -> country.setId(storeCountry(country)));
         dataCountryCovidList.forEach(this::storeDateCountryCovidStatus);
     }
 
-    private void storeCountry(Country country) {
+    private Integer storeCountry(Country country) {
         try {
             preparedSaveCountry.setString(1, country.getName() == null ? "" : country.getName());
             preparedSaveCountry.setLong(2, country.getNumberOfCitizens() == null ? 0L : country.getNumberOfCitizens());
             preparedSaveCountry.setString(3, country.getTwoLetterCode() == null ? "" : country.getTwoLetterCode());
-            preparedSaveCountry.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            preparedSaveCountry.executeUpdate();
+            ResultSet generatedKeys = preparedSaveCountry.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                return generatedKeys.getInt(1);
+            } else {
+                throw new SQLException();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Błąd");
         }
     }
 
     private void storeDateCountryCovidStatus(DateCountryCovidStatus dataRow) {
         try {
             preparedSaveDateCountryCovidStatus.setLong(1, dataRow.getActiveCases());
-            preparedSaveDateCountryCovidStatus.setDate(1, java.sql.Date.valueOf(dataRow.getDate()));
-            preparedSaveDateCountryCovidStatus.setLong(1, dataRow.getDeathsOnThatDay());
-            preparedSaveDateCountryCovidStatus.setLong(1, dataRow.getNewCasesOnThatDay());
-            preparedSaveDateCountryCovidStatus.setLong(1, dataRow.getRecoveredOnThatDay());
-            preparedSaveDateCountryCovidStatus.setLong(1, dataRow.getTotalCases());
-            preparedSaveDateCountryCovidStatus.setLong(1, dataRow.getTotalDeaths());
-            preparedSaveDateCountryCovidStatus.setLong(1, dataRow.getTotalRecovered());
-            preparedSaveDateCountryCovidStatus.setLong(1, dataRow.getCountry().getId());
+            preparedSaveDateCountryCovidStatus.setDate(2, java.sql.Date.valueOf(dataRow.getDate()));
+            preparedSaveDateCountryCovidStatus.setLong(3, dataRow.getDeathsOnThatDay());
+            preparedSaveDateCountryCovidStatus.setLong(4, dataRow.getNewCasesOnThatDay());
+            preparedSaveDateCountryCovidStatus.setLong(5, dataRow.getRecoveredOnThatDay());
+            preparedSaveDateCountryCovidStatus.setLong(6, dataRow.getTotalCases());
+            preparedSaveDateCountryCovidStatus.setLong(7, dataRow.getTotalDeaths());
+            preparedSaveDateCountryCovidStatus.setLong(8, dataRow.getTotalRecovered());
+            preparedSaveDateCountryCovidStatus.setLong(9, dataRow.getCountry().getId());
             preparedSaveDateCountryCovidStatus.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
