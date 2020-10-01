@@ -9,23 +9,24 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import pl.sdacademy.coronavirus.CovidDao;
 
 import java.time.LocalDate;
 
 public class ChartUI extends VBox {
 
 
-    private final Object CovidDao;
+    private final CovidDao dao;
     Label primaryChart;
     Label totalCases;
     Label countOfTotalCases;
     Label totalDeath;
     Label countOfTotalDeath;
 
-    public ChartUI(Stage stage, Object covidDao) {
+    public ChartUI(Stage stage, CovidDao dao) {
         super();
         //FX12
-        CovidDao = covidDao;
+        this.dao = dao;
         //1
         primaryChart = new Label("Wykres");
         totalCases = new Label("Aktualnie zarażonych na świecie: ");
