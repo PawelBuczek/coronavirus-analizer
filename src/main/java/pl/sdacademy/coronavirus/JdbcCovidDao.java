@@ -43,7 +43,7 @@ public class JdbcCovidDao implements CovidDao {
                         " WHERE status.country_id = ? AND status.date BETWEEN ? AND ?");
         preparedSelectByCountry = connection.prepareStatement(
                 "SELECT * FROM `coronavirus-analizer`.datecountrycovidstatus status LEFT JOIN `coronavirus-analizer`.country ON status.country_id = country.id" +
-                        " WHERE status.country_id = ?");
+                        " WHERE status.country_id = ? AND status.date = (SELECT MAX(date) FROM `coronavirus-analizer`.datecountrycovidstatus)");
     }
 
     public MysqlDataSource getDataSource() {
@@ -76,7 +76,7 @@ public class JdbcCovidDao implements CovidDao {
             preparedSelectByCountryAndDateRange.setInt(1, countryId);
             preparedSelectByCountryAndDateRange.setDate(2, java.sql.Date.valueOf(startDate));
             preparedSelectByCountryAndDateRange.setDate(3, java.sql.Date.valueOf(lastDate));
-            return getListOfDataCountryCovidStatuses();
+            return getDateCountryCovidStatuses(preparedSelectByCountryAndDateRange);
         } catch (SQLException e) {
             throw new RuntimeException("Błąd");
         }
@@ -85,11 +85,31 @@ public class JdbcCovidDao implements CovidDao {
     @Override
     public List<DateCountryCovidStatus> getCurrentDataByCountry(Integer countryId) {
         try {
-            preparedSelectByCountryAndDateRange.setInt(1, countryId);
-            return getListOfDataCountryCovidStatuses();
+            preparedSelectByCountry.setInt(1, countryId);
+            return getDateCountryCovidStatuses(preparedSelectByCountry);
         } catch (SQLException e) {
             throw new RuntimeException("Błąd");
         }
+    }
+
+    private List<DateCountryCovidStatus> getDateCountryCovidStatuses(PreparedStatement preparedStatement) throws SQLException {
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<DateCountryCovidStatus> dataRows = new ArrayList<>();
+        while (resultSet.next()) {
+            dataRows.add(new DateCountryCovidStatus(
+                    new Country(resultSet.getString("name"),
+                            resultSet.getString("twoLetterCode"),
+                            resultSet.getLong("numberOfCitizens")),
+                    ((Date) resultSet.getObject("date")).toLocalDate(),
+                    (Long) resultSet.getObject("totalCases"),
+                    (Long) resultSet.getObject("totalDeaths"),
+                    (Long) resultSet.getObject("totalRecovered"),
+                    (Long) resultSet.getObject("newCasesOnThatDay"),
+                    (Long) resultSet.getObject("deathsOnThatDay"),
+                    (Long) resultSet.getObject("recoveredOnThatDay")
+            ));
+        }
+        return dataRows;
     }
 
     @Override
@@ -145,23 +165,4 @@ public class JdbcCovidDao implements CovidDao {
         }
     }
 
-    private List<DateCountryCovidStatus> getListOfDataCountryCovidStatuses() throws SQLException {
-        ResultSet resultSet = preparedSelectByCountryAndDateRange.executeQuery();
-        List<DateCountryCovidStatus> dataRows = new ArrayList<>();
-        while (resultSet.next()) {
-            dataRows.add(new DateCountryCovidStatus(
-                    new Country(resultSet.getString("name"),
-                            resultSet.getString("twoLetterCode"),
-                            resultSet.getLong("numberOfCitizens")),
-                    ((Date) resultSet.getObject("date")).toLocalDate(),
-                    (Long) resultSet.getObject("totalCases"),
-                    (Long) resultSet.getObject("totalDeaths"),
-                    (Long) resultSet.getObject("totalRecovered"),
-                    (Long) resultSet.getObject("newCasesOnThatDay"),
-                    (Long) resultSet.getObject("deathsOnThatDay"),
-                    (Long) resultSet.getObject("recoveredOnThatDay")
-            ));
-        }
-        return dataRows;
-    }
 }

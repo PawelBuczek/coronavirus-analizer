@@ -1,6 +1,5 @@
 package pl.sdacademy.coronavirus;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.io.IOException;
@@ -16,7 +15,7 @@ public class MainJdbcCheck {
                 .configure("hibernate.cfg.xml")
                 .buildSessionFactory();
 
-        System.out.println("this takes way too long for now (around 5 long minutes)");
+        System.out.println("this takes way too long for now (around 3 long minutes)");
         try {
             List<CovidDataForDateAndCountryFromAPI> listDataFromAPI = ApiDataProvider.getListOfCovidCountryStatusFromJason("src/main/resources/covidData_25Sep_2020_sample.json");
             JdbcCovidDao dao = new JdbcCovidDao("password");
@@ -25,6 +24,7 @@ public class MainJdbcCheck {
             List<Country> countries = dao.getCountries();
             System.out.println(countries.get(3));
             System.out.println(countries.get(7));
+
             System.out.println(System.lineSeparator() + "check to get lines");
             List<DateCountryCovidStatus> dataRows = dao.getDataByCountryAndDateRange(
                     4,
@@ -32,8 +32,15 @@ public class MainJdbcCheck {
                     LocalDate.of(2020,6,10)
             );
             dataRows.forEach(System.out::println);
+
+            List<DateCountryCovidStatus> dataRowsCountryCurrent = dao.getCurrentDataByCountry(67);
+            System.out.println(System.lineSeparator() + "check of getCurrentDataByCountry");
+            dataRowsCountryCurrent.forEach(System.out::println);
+
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
+
+
     }
 }
