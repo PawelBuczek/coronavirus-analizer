@@ -36,6 +36,7 @@ public class Main {
         System.out.println(result);
         transaction.commit();
         session.close();
+
     }
     public static List<Weather> readDataModified(SessionFactory sessionFactory) {
 
@@ -46,6 +47,7 @@ public class Main {
         transaction.commit();
         session.close();
         return result;
+
     }
 
 

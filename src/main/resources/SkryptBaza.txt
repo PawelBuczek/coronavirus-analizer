@@ -9,3 +9,4 @@ INSERT INTO `weather_data`.`weather` (`temperatureCelsius`, `cloudCover`, `windS
 INSERT INTO `weather_data`.`weather` (`temperatureCelsius`, `cloudCover`, `windSpeedKmPerH`) VALUES ('10', '0.7', '11');
 INSERT INTO `weather_data`.`weather` (`temperatureCelsius`, `cloudCover`, `windSpeedKmPerH`) VALUES ('15', '0.45', '6');
 INSERT INTO `weather_data`.`weather` (`temperatureCelsius`, `cloudCover`, `windSpeedKmPerH`) VALUES ('20', '0.1', '5');
+
