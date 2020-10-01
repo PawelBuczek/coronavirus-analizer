@@ -8,7 +8,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import pl.sdacademy.coronavirus.CovidDao;
 
 import java.time.LocalDate;
@@ -23,7 +22,7 @@ public class ChartUI extends VBox {
     Label totalDeath;
     Label countOfTotalDeath;
 
-    public ChartUI(Stage stage, CovidDao dao) {
+    public ChartUI(CovidDao dao) {
         super();
         //FX12
         this.dao = dao;
@@ -50,10 +49,7 @@ public class ChartUI extends VBox {
             }
         });
 
-        //4
-        stage.setTitle("Wykres");
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
-
     }
 }
