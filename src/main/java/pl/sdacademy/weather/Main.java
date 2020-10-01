@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
 
         SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
+                .configure("hibernateWeather.cfg.xml")
                 .buildSessionFactory();
         readData(sessionFactory);
         System.out.println(readDataModified(sessionFactory));
@@ -31,7 +31,7 @@ public class Main {
 
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        Query<Weather> query = session.createQuery("FROM Weather ", Weather.class);
+        Query<Weather> query = session.createQuery("SELECT w FROM Weather w" );
         List<Weather> result = query.getResultList();
         System.out.println(result);
         transaction.commit();
@@ -41,12 +41,13 @@ public class Main {
 
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        Query<Weather> query = session.createQuery("FROM Weather ", Weather.class);
+        Query<Weather> query = session.createQuery("SELECT w FROM Weather w ");
         List<Weather> result = query.getResultList();
         transaction.commit();
         session.close();
         return result;
     }
+
 
 
 
