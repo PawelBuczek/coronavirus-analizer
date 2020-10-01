@@ -1,6 +1,10 @@
 package pl.sdacademy.coronavirus;
 
 import com.google.gson.Gson;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -38,8 +42,14 @@ public class ApiDataProvider {
     }
 
     public static List<CovidDataForDateAndCountryFromAPI> getListOfCovidCountryStatusFromJason() throws IOException {
-        InputStream in = new URL("https://thevirustracker.com/timeline/map-data.json").openStream();
+//        InputStream in = new URL("https://thevirustracker.com/timeline/map-data.json").openStream();
+//        Files.copy(in, Paths.get("src/main/resources/data.json"), StandardCopyOption.REPLACE_EXISTING);
+        CloseableHttpClient aDefault = HttpClients.createDefault();
+        CloseableHttpResponse execute = aDefault.execute(new HttpGet("https://thevirustracker.com/timeline/2.json"));
+        System.out.println(execute.getStatusLine().getStatusCode());
+        InputStream in = execute.getEntity().getContent();
         Files.copy(in, Paths.get("src/main/resources/data.json"), StandardCopyOption.REPLACE_EXISTING);
+        //        InputStream in = new URL("https://thevirustracker.com/timeline/2.json").openStream();
         return getListOfCovidCountryStatusFromJason("src/main/resources/data.json");
     }
 
