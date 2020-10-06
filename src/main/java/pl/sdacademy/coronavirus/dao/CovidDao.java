@@ -1,4 +1,7 @@
-package pl.sdacademy.coronavirus;
+package pl.sdacademy.coronavirus.dao;
+
+import pl.sdacademy.coronavirus.Country;
+import pl.sdacademy.coronavirus.DateCountryCovidStatus;
 
 import java.sql.SQLException;
 import java.time.LocalDate;

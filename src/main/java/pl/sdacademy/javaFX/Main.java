@@ -3,7 +3,7 @@ package pl.sdacademy.javaFX;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pl.sdacademy.coronavirus.DummyCovidDao;
+import pl.sdacademy.coronavirus.dao.DummyCovidDao;
 
 public class Main extends Application {
     @Override

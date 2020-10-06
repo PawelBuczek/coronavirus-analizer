@@ -1,6 +1,9 @@
-package pl.sdacademy.coronavirus;
+package pl.sdacademy.coronavirus.dao;
 
 import org.hibernate.cfg.Configuration;
+import pl.sdacademy.coronavirus.Country;
+import pl.sdacademy.coronavirus.DateCountryCovidStatus;
+
 import java.time.LocalDate;
 import java.util.List;
 

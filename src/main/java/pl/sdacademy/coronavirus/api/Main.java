@@ -1,19 +1,17 @@
-package pl.sdacademy.coronavirus;
+package pl.sdacademy.coronavirus.api;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import pl.sdacademy.coronavirus.DateCountryCovidStatus;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .buildSessionFactory();
@@ -38,8 +36,6 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
 
     }
 }

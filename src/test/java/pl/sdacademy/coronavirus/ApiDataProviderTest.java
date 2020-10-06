@@ -2,6 +2,8 @@ package pl.sdacademy.coronavirus;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pl.sdacademy.coronavirus.api.ApiDataProvider;
+import pl.sdacademy.coronavirus.api.CovidDataForDateAndCountryFromAPI;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;

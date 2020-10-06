@@ -1,16 +1,14 @@
 package pl.sdacademy.credentials;
 
 import org.hibernate.SessionFactory;
-
 import org.hibernate.cfg.Configuration;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HibernateUserRepositoryTest {
     private static HibernateUserRepository hibernateUserRepository;

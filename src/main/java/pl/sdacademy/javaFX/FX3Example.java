@@ -1,9 +1,7 @@
 package pl.sdacademy.javaFX;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pl.sdacademy.coronavirus.CovidDao;
 
 public class FX3Example extends Application {
     @Override

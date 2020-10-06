@@ -1,8 +1,9 @@
 package pl.sdacademy.coronavirus;
 
 import org.junit.jupiter.api.Test;
+import pl.sdacademy.coronavirus.exporting.SessionFactoryProvider;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SessionFactoryProviderTest {
     private static final SessionFactoryProvider sessionFactoryProvider = new SessionFactoryProvider();

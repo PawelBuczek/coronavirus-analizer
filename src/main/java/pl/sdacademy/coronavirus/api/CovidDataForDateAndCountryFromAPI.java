@@ -1,4 +1,4 @@
-package pl.sdacademy.coronavirus;
+package pl.sdacademy.coronavirus.api;
 
 import java.time.LocalDate;
 

@@ -1,14 +1,12 @@
 package pl.sdacademy.javaFX;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
-import pl.sdacademy.coronavirus.CovidDao;
+import pl.sdacademy.coronavirus.dao.CovidDao;
 
 import java.time.LocalDate;
 
@@ -40,13 +38,10 @@ public class ChartUI extends VBox {
 
         //3
         final DatePicker datePicker = new DatePicker();
-        datePicker.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                LocalDate chooseTheDate;
-                chooseTheDate = datePicker.getValue();
-                System.err.println("Selected date: " + chooseTheDate);
-            }
+        datePicker.setOnAction(actionEvent -> {
+            LocalDate chooseTheDate;
+            chooseTheDate = datePicker.getValue();
+            System.err.println("Selected date: " + chooseTheDate);
         });
 
         final CategoryAxis xAxis = new CategoryAxis();

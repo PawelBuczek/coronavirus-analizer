@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import pl.sdacademy.coronavirus.CovidDao;
+import pl.sdacademy.coronavirus.dao.CovidDao;
 
 public class MainUI extends VBox {
     Button buttonShowGraph;

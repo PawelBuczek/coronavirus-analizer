@@ -1,4 +1,4 @@
-package pl.sdacademy.coronavirus;
+package pl.sdacademy.coronavirus.exporting;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,7 +11,7 @@ public interface DataExport {
     // typu FileInputStream oraz Scanner.
 
 
-    public static void export() throws IOException {
+    static void export() throws IOException {
 
         FileInputStream fileInputStream = new FileInputStream("entity_data_provider_export.txt");
 

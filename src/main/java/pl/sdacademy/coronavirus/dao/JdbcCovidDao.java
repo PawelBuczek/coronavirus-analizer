@@ -1,6 +1,8 @@
-package pl.sdacademy.coronavirus;
+package pl.sdacademy.coronavirus.dao;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import pl.sdacademy.coronavirus.Country;
+import pl.sdacademy.coronavirus.DateCountryCovidStatus;
 
 import java.sql.*;
 import java.time.LocalDate;
